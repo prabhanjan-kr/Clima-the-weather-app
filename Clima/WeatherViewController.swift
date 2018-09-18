@@ -21,6 +21,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
     //TODO: Declare instance variables here
     let locationManager = CLLocationManager()
+    var weatherData : WeatherDataModel = WeatherDataModel()
     var params : [String:String] = [String:String]()
     
 
@@ -78,10 +79,10 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     //Write the updateWeatherData method here:
     func updateWeatherData(json : JSON) {
-        let temperature = json["main"]["temp"].doubleValue - 273.15
-        self.temperatureLabel.text = String(describing: Int(temperature.rounded())) + "°C"
-        
-        self.cityLabel.text = String(describing: json["name"])
+        weatherData.temperature = Int(json["main"]["temp"].doubleValue - 273.15)
+        weatherData.cityName =  json["name"].stringValue
+        weatherData.condition = json["weather"][0]["id"].intValue
+        self.updateUIWithWeatherData()
         
     }
     
@@ -91,10 +92,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     //MARK: - UI Updates
     /***************************************************************/
-    
-    
     //Write the updateUIWithWeatherData method here:
-    
+    func updateUIWithWeatherData() {
+        self.temperatureLabel.text = String(describing: weatherData.temperature) + "°"
+        self.cityLabel.text = weatherData.cityName
+        self.weatherIcon.image = UIImage(named: weatherData.updateWeatherIcon(condition: weatherData.condition))
+    }
     
     
     
