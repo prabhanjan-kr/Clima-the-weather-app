@@ -77,13 +77,23 @@
                                     <constraint firstItem="Ssc-Cu-XmK" firstAttribute="top" secondItem="C11-fU-d6q" secondAttribute="bottom" constant="2" id="xht-1J-4cs"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="io4-zh-3da">
+                                <rect key="frame" x="24" y="28" width="44" height="35"/>
+                                <state key="normal" backgroundImage="Cloud-Refresh"/>
+                                <connections>
+                                    <action selector="refreshButtonClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9gK-V8-0F6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="io4-zh-3da" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="8" id="5WN-87-Naf"/>
                             <constraint firstItem="E0h-aX-oBb" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="7vB-96-MsA"/>
                             <constraint firstItem="E0h-aX-oBb" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="CN9-ZE-mQk"/>
                             <constraint firstItem="th1-Kr-XgW" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="OCL-NQ-UMw"/>
+                            <constraint firstItem="io4-zh-3da" firstAttribute="centerY" secondItem="th1-Kr-XgW" secondAttribute="centerY" id="RRx-Oe-PJx"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="VNR-V6-HMc" secondAttribute="bottom" constant="10" id="Z6J-2F-fG1"/>
+                            <constraint firstItem="io4-zh-3da" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="czj-uf-tGb"/>
                             <constraint firstAttribute="trailing" secondItem="E0h-aX-oBb" secondAttribute="trailing" id="hub-6C-cfa"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="E0h-aX-oBb" secondAttribute="bottom" id="iES-6G-TkF"/>
                             <constraint firstItem="VNR-V6-HMc" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="l5f-UK-c3f"/>
@@ -189,6 +199,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Cloud-Refresh" width="44" height="41"/>
         <image name="left" width="32" height="32"/>
         <image name="switch" width="64" height="64"/>
         <image name="weatherBg" width="490" height="736"/>

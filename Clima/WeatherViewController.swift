@@ -21,7 +21,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     //TODO: Declare instance variables here
     let locationManager = CLLocationManager()
     var weatherData : WeatherDataModel = WeatherDataModel()
-    var params : [String:String] = [String:String]()
+    
     
     //Pre-linked IBOutlets
     @IBOutlet weak var weatherIcon: UIImageView!
@@ -40,6 +40,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         
     }
     
+    @IBAction func refreshButtonClicked(_ sender: UIButton) {
+        locationManager.startUpdatingLocation()
+    }
     
     //MARK: - Networking
     /***************************************************************/
@@ -52,8 +55,14 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
                 print("Successful reception of weather data")
                 let responseJSON : JSON = JSON(response.result.value!)
                 print(responseJSON)
-                self.updateWeatherData(json: responseJSON)
-                
+                if responseJSON["cod"].stringValue == "404" {
+                    self.cityLabel.text = responseJSON["message"].stringValue
+                    self.weatherIcon.image = UIImage(named: "dunno")
+                    self.temperatureLabel.text = ""
+                }
+                else {
+                    self.updateWeatherData(json: responseJSON)
+                }
                 
             }
             else {
@@ -95,6 +104,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
             if location.horizontalAccuracy > 0 {
                 locationManager.stopUpdatingLocation()
             }
+            var params : [String:String] = [String:String]()
             params["lat"] = String(location.coordinate.latitude)
             params["lon"] = String(location.coordinate.longitude)
             params["appid"] = APP_ID
@@ -113,6 +123,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     /***************************************************************/
     func cityNameChanged(to cityName: String) {
         print(cityName)
+        //construct param into a dictionary
+        var param = [String:String]()
+        param["q"] = cityName
+        param["appid"] = APP_ID
+        //pass it to getWeatherData
+        getWeatherData(url: WEATHER_URL, parameters: param)
     }
     
     
