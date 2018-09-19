@@ -30,11 +30,15 @@ class ChangeCityViewController: UIViewController {
     //This is the IBAction that gets called when the user taps on the "Get Weather" button:
     @IBAction func getWeatherPressed(_ sender: AnyObject) {
         
-        
-        if let enteredCityName = changeCityTextField.text {
-        self.delegate?.cityNameChanged(to: enteredCityName)
+        if (changeCityTextField.text == nil || changeCityTextField.text == "") {
+            print("Enter a city name to Continue")
         }
-        self.dismiss(animated: true, completion: nil)
+        else if let enteredCityName = changeCityTextField.text {
+            self.delegate?.cityNameChanged(to: enteredCityName)
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        
         
         
     }
